@@ -1,0 +1,9 @@
+pandas==2.2.2
+numpy==1.26.4
+pm4py==2.7.17
+rapidfuzz==3.9.4
+matplotlib==3.9.2
+seaborn==0.13.2
+jupyter==1.0.0
+ipykernel==6.29.5
+tabulate==0.10.0

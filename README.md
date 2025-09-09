@@ -1,68 +1,67 @@
 # Duplicate-Invoice-Solution
 AI-powered duplicate invoice detection enriched with process mining to uncover root causes and prevent financial leakage.
 
-# Process-Enriched Duplicate Invoice Detection
-
 ## 📌 Project Description
-This project is an early-stage prototype that enhances traditional **duplicate invoice detection** by linking it to **process mining insights**.
+This project enhances traditional **duplicate invoice detection** by linking it to **process mining insights** using Purchase-to-Pay (P2P) event logs from the [4TU Data Centre (BPI Challenge)](https://data.4tu.nl/).
 
-Using the **Purchase-to-Pay (P2P) event logs** from the [4TU Data Centre (BPI Challenge)](https://data.4tu.nl/), we aim to:
-- Detect **exact and near-duplicate invoices** using fuzzy/NLP-based matching.
-- Correlate duplicates with their **end-to-end process traces** (activities, users, timestamps).
-- Analyze **root causes** of duplication (manual entry, workflow deviations, master data issues).
-- Lay the foundation for **risk scoring and proactive prevention** in Accounts Payable processes.
+**Key Features:**
+- **Mixed Duplicate Generation**: Creates realistic duplicates (fuzzy-detectable + non-fuzzy-detectable)
+- **Fuzzy Matching Detection**: Detects typos, character variations, and similar strings
+- **Process Mining Integration**: Correlates duplicates with end-to-end process traces
+- **Root Cause Analysis**: Identifies why duplicates happen (manual entry, workflow deviations)
+- **Comprehensive Visualization**: Single dashboard with detection insights and type breakdown
 
-This work moves beyond simple detection and focuses on **why duplicates happen** and **how to prevent them**.
+## 🎯 Duplicate Types
 
----
+### 🔍 Fuzzy-Detectable Duplicates (60%)
+- **Character Substitution**: `12345` → `12346` (typos)
+- **Insertion/Deletion**: `12345` → `123456` or `1234`
+- **Transposition**: `12345` → `12435`
 
-## 🎯 What We’re Trying to Do
-- Move from **reactive detection** → **proactive prevention**.
-- Provide **explainability**: clear reasons why invoices are flagged as duplicates.
-- Enable **AP and compliance teams** to address upstream process gaps.
+### 🎯 Non-Fuzzy-Detectable Duplicates (40%)
+- **Semantic Variations**: `12345` → `APP00012345` (different format)
+- **System Variations**: `12345` → `WEB00012345` (different interface)
+- **Format Variations**: `12345` → `SYS00012345` (system-specific)
 
----
+## ⚙️ Quick Start
 
-## ⚙️ Setup Instructions (Virtual Environment + Dependencies)
-
-> **Prerequisites**
-> - Python **3.9+** installed (`python --version`)
-> - Git installed
-
-### 1) Clone the Repository
+### 1) Setup
 ```bash
 git clone https://github.com/uppili-srinivasan/Duplicate-Invoice-Solution.git
 cd Duplicate-Invoice-Solution
-```
-
-### 2) Create & Activate a Virtual Environment
-- For mac/Linux:
-```bash
 python3 -m venv venv
-source venv/bin/activate
-```
-- For Windows (PowerShell):
-```bash
-py -3 -m venv venv
-.\venv\Scripts\Activate.ps1
-```
-### 3) Create `requirements.txt`
-Create a file named **`requirements.txt`** in the project root and copy the following into it:
-
-```txt
-pandas
-numpy
-pm4py
-rapidfuzz
-matplotlib
-seaborn
-jupyter
-```
-### 4) Upgrade pip and Install Dependencies
-Make sure your `pip` is up to date, then install all required dependencies:
-
-```bash
-python -m pip install --upgrade pip
+source venv/bin/activate  # Linux/Mac
+# .\venv\Scripts\Activate.ps1  # Windows
 pip install -r requirements.txt
 ```
+
+### 2) Run Analysis
+```bash
+# Complete analysis with mixed duplicates
+python main.py
+
+# Demo with examples
+python demo_mixed_duplicates.py
+
+# Quick test
+python test_mixed_duplicates.py
+```
+
+## 📊 Expected Results
+- **Fuzzy-detectable**: 80-95% detection rate
+- **Non-fuzzy-detectable**: 0-20% detection rate
+- **Overall**: 50-70% detection rate
+- **Output**: CSV files with duplicate types + comprehensive visualization
+
+## 🔧 Core Files
+- `main.py` - Complete analysis pipeline
+- `create_mixed_duplicates.py` - Mixed duplicate generation
+- `detect_duplicates_optimized.py` - Fuzzy matching detection
+- `run_complete_analysis.py` - Enhanced analysis with type organization
+- `demo_mixed_duplicates.py` - Demonstration script
+
+## 📈 Output
+- **CSV Files**: `output/duplicates_by_type.csv` (all duplicates with types)
+- **Visualization**: Single dashboard with 4 subplots showing detection insights
+- **Examples**: `df.head()` samples for each duplicate type
 
